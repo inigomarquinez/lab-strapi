@@ -25,3 +25,7 @@ cd strapi-server && npm run develop
 cd next-app && npm run dev
 cd cms-service && npm run start:dev
 ```
+
+- The strapi admin will be available at http://localhost:1337/admin
+- The web app will be available at http://localhost:3000
+- The CMS service will be available at http://localhost:3001
