@@ -29,3 +29,13 @@ cd cms-service && npm run start:dev
 - The strapi admin will be available at http://localhost:1337/admin
 - The web app will be available at http://localhost:3000
 - The CMS service will be available at http://localhost:3001
+
+## Useful links
+
+### Strapi
+
+- https://strapi.io/blog/demystifying-strapi-s-populate-and-filtering
+
+### PayloadCMS
+
+- https://payloadcms.com/docs/production/deployment#file-storage
