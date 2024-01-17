@@ -24,8 +24,9 @@ cd next-app && npm install
 cd cms-service && npm install
 ```
 
-### Configure the services
+### Configure the services (.env files)
 
+- Go to /localstack folder copy and rename the `.env.example` file to `.env`
 - Go to each Strapi instance and set different ports in the `.env` files
   - `PORT=1337` for strapi-server-dev
   - `PORT=1338` for strapi-server-prod
