@@ -29,6 +29,7 @@ npm install
 ### Configure the services (.env files)
 
 - Go to `localstack` folder copy and rename the `.env.example` file to `.env`
+- Go to `mongo` folder copy and rename the `.env.example` file to `.env`
 - Go to `strapi/strapi-dev` folder copy and rename the `.env.example` file to `.env`
 - Go to `strapi/strapi-prod` folder copy and rename the `.env.example` file to `.env`
 - Go to `payloadcms/payloadcms-dev` folder copy and rename the `.env.example` file to `.env`
@@ -41,10 +42,15 @@ cd strapi/strapi-server-dev && npm run develop
 cd strapi/strapi-server-prod && npm run develop
 cd next-app && npm run dev
 cd cms-service && npm run start:dev
+cd payloadcms/payloadcms-dev && npm run dev
+cd payloadcms/payloadcms-prod && npm run dev
+cd cms-service && npm run start:dev
 ```
 
 - The strapi admin for DEV will be available at http://localhost:1337/admin
 - The strapi admin for PROD will be available at http://localhost:1338/admin
+- The payloadcms admin for DEV will be available at http://localhost:2337/admin
+- The payloadcms admin for PROD will be available at http://localhost:2338/admin
 - The web app will be available at http://localhost:3000
 - The CMS service will be available at http://localhost:3001
 
