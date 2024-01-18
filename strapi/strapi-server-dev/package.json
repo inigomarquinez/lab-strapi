@@ -7,7 +7,9 @@
     "develop": "strapi develop",
     "start": "strapi start",
     "build": "strapi build",
-    "strapi": "strapi"
+    "strapi": "strapi",
+    "infra:up": "docker compose up -d",
+    "infra:down": "docker compose down"
   },
   "devDependencies": {},
   "dependencies": {
@@ -15,7 +17,7 @@
     "@strapi/plugin-users-permissions": "4.17.1",
     "@strapi/plugin-i18n": "4.17.1",
     "@strapi/plugin-cloud": "4.17.1",
-    "better-sqlite3": "8.6.0",
+    "pg": "8.8.0",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
     "react-router-dom": "5.3.4",
@@ -25,7 +27,7 @@
     "name": "A Strapi developer"
   },
   "strapi": {
-    "uuid": "4c61e5cc-1c23-4983-a487-14ae09e91b94"
+    "uuid": "4f036efa-f979-45e3-a332-8e6e29e634bc"
   },
   "engines": {
     "node": ">=18.0.0 <=20.x.x",
