@@ -1,24 +1,26 @@
-version: "3"
+version: '3'
 
 services:
   payload:
+    container_name: payloadcms-dev
     image: node:18-alpine
     ports:
-      - "3000:${PORT:-3000}"
+      - '${PORT}:3000'
     volumes:
       - .:/home/node/app
       - node_modules:/home/node/app/node_modules
     working_dir: /home/node/app/
-    command: sh -c "yarn install && yarn dev"
+    command: sh -c 'yarn install && yarn dev'
     depends_on:
       - mongo
     env_file:
       - .env
 
   mongo:
+    container_name: payloadcms-mongo-dev
     image: mongo:5.0
     ports:
-      - "27017:${MONGO_PORT:-27017}"
+      - '${MONGO_PORT}:27017'
     command:
       - --storageEngine=wiredTiger
     volumes:
@@ -26,19 +28,6 @@ services:
     logging:
       driver: none
 
-  localstack:
-    container_name: "${PROJECT:-localstack-main}"
-    image: localstack/localstack
-    ports:
-      - "127.0.0.1:4566:${AWS_PORT:-4566}" # LocalStack Gateway
-      - "127.0.0.1:4510-4559:${AWS_SERVICES_PORT_RANGE:-4510-4559}" # external services port range
-    environment:
-      # LocalStack configuration: https://docs.localstack.cloud/references/configuration/
-      - DEBUG=${DEBUG:-0}
-      - SERVICES=s3
-    volumes:
-      - "./volume:/var/lib/localstack"
-      - "/var/run/docker.sock:/var/run/docker.sock"
 volumes:
   data:
   node_modules:

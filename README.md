@@ -15,6 +15,8 @@ It is made of 4 modules:
 
 ## How to run in development mode
 
+We're using [npm workspaces](https://docs.npmjs.com/cli/v9/using-npm/workspaces)
+
 ### Install dependencies
 
 ```bash
