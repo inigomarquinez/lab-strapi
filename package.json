@@ -1,0 +1,37 @@
+{
+  "name": "lab-strapi",
+  "version": "1.0.0",
+  "description": "POC to compare different CMSs (Strapi vs PayloadCMS)",
+  "scripts": {
+    "infra:up": "npm-run-all --parallel generic:infra:up strapi:dev:infra:up strapi:prod:infra:up",
+    "infra:down": "npm-run-all --parallel generic:infra:down strapi:dev:infra:down strapi:prod:infra:down",
+    "generic:infra:up": "cd localstack && docker compose up -d",
+    "generic:infra:down": "cd localstack && docker compose down",
+    "strapi:dev:infra:up": "cd strapi/strapi-server-dev && npm run infra:up",
+    "strapi:prod:infra:up": "cd strapi/strapi-server-prod && npm run infra:up",
+    "strapi:dev:infra:down": "cd strapi/strapi-server-dev && npm run infra:down",
+    "strapi:prod:infra:down": "cd strapi/strapi-server-prod && npm run infra:down",
+    "payloadcms:dev:infra:up": "cd payloadcms/payloadcms-server-dev && npm run infra:up",
+    "payloadcms:prod:infra:up": "cd payloadcms/payloadcms-server-prod && npm run infra:up",
+    "payloadcms:dev:infra:down": "cd payloadcms/payloadcms-server-dev && npm run infra:down",
+    "payloadcms:prod:infra:down": "cd payloadcms/payloadcms-server-prod && npm run infra:down"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/inigomarquinez/lab-strapi.git"
+  },
+  "keywords": [
+    "cms",
+    "strapi",
+    "payloadcms"
+  ],
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/inigomarquinez/lab-strapi/issues"
+  },
+  "homepage": "https://github.com/inigomarquinez/lab-strapi#readme",
+  "dependencies": {
+    "npm-run-all": "^4.1.5"
+  }
+}
