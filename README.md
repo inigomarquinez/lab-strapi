@@ -2,7 +2,7 @@
 
 Project to test [strapi](https://strapi.io/) features.
 
-It is made of 4 modules:
+It is made of 5 modules:
 
 - `strapi`:
   - `strapi-server-dev`: the strapi server DEV instance
@@ -12,24 +12,27 @@ It is made of 4 modules:
   - `payloadcms-server-prod`: the payloadcms server PROD instance
 - `next-app`: the frontend application (based on [next.js](https://nextjs.org/))
 - `cms-server`: the backend application (based on [nestjs](https://nestjs.com/))
+- `localstack`: the localstack instance (based on [localstack](https://www.localstack.cloud/))
 
 ## How to run in development mode
 
+We're using [npm workspaces](https://docs.npmjs.com/cli/v9/using-npm/workspaces)
+
 ### Install dependencies
 
+From the root folder, just run:
+
 ```bash
-cd strapi/strapi-server-dev && npm install
-cd strapi/strapi-server-prod && npm install
-cd next-app && npm install
-cd cms-service && npm install
+npm install
 ```
 
 ### Configure the services (.env files)
 
-- Go to /localstack folder copy and rename the `.env.example` file to `.env`
-- Go to each Strapi instance and set different ports in the `.env` files
-  - `PORT=1337` for strapi-server-dev
-  - `PORT=1338` for strapi-server-prod
+- Go to `localstack` folder copy and rename the `.env.example` file to `.env`
+- Go to `strapi/strapi-dev` folder copy and rename the `.env.example` file to `.env`
+- Go to `strapi/strapi-prod` folder copy and rename the `.env.example` file to `.env`
+- Go to `payloadcms/payloadcms-dev` folder copy and rename the `.env.example` file to `.env`
+- Go to `payloadcms/payloadcms-prod` folder copy and rename the `.env.example` file to `.env`
 
 ### Run the services
 
