@@ -16,6 +16,7 @@ const start = async () => {
     express: app,
     onInit: async () => {
       payload.logger.info(`Payload Admin URL: ${payload.getAdminURL()}`);
+      payload.logger.info(`Payload Port: ${process.env.PORT || 3000}`);
     },
   });
 
