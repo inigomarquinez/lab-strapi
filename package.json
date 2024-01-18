@@ -5,6 +5,7 @@
   "workspaces": [
     "cms-service",
     "localstack",
+    "mongo",
     "next-app",
     "strapi/strapi-dev",
     "strapi/strapi-prod",
