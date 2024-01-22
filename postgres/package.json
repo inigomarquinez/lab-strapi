@@ -1,7 +1,7 @@
 {
-  "name": "mongodb",
+  "name": "postgres",
   "version": "1.0.0",
-  "description": "mongodb infrastructure",
+  "description": "postgres infrastructure",
   "scripts": {
     "infra:up": "docker compose up -d",
     "infra:down": "docker compose down"

@@ -6,6 +6,7 @@
     "cms-service",
     "localstack",
     "mongo",
+    "postgres",
     "next-app",
     "strapi/strapi-dev",
     "strapi/strapi-prod",
