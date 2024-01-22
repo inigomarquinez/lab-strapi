@@ -4,12 +4,10 @@
   "version": "0.1.0",
   "description": "A Strapi application",
   "scripts": {
-    "develop": "strapi develop",
+    "develop": "NODE_ENV=abc strapi develop",
     "start": "strapi start",
     "build": "strapi build",
-    "strapi": "strapi",
-    "infra:up": "docker compose up -d",
-    "infra:down": "docker compose down"
+    "strapi": "strapi"
   },
   "devDependencies": {},
   "dependencies": {

@@ -2,7 +2,7 @@
 
 Project to test [strapi](https://strapi.io/) features.
 
-It is made of 5 modules:
+It is made of the following modules:
 
 - `strapi`:
   - `strapi-server-dev`: the strapi server DEV instance
@@ -13,6 +13,8 @@ It is made of 5 modules:
 - `next-app`: the frontend application (based on [next.js](https://nextjs.org/))
 - `cms-server`: the backend application (based on [nestjs](https://nestjs.com/))
 - `localstack`: the localstack instance (based on [localstack](https://www.localstack.cloud/))
+- `mongo`: the mongo instance (based on [mongo](https://www.mongodb.com/))
+- `postgres`: the postgres instance (based on [postgres](https://www.postgresql.org/))
 
 ## How to run in development mode
 
@@ -30,6 +32,7 @@ npm install
 
 - Go to `localstack` folder copy and rename the `.env.example` file to `.env`
 - Go to `mongo` folder copy and rename the `.env.example` file to `.env`
+- Go to `postgres` folder copy and rename the `.env.example` file to `.env`
 - Go to `strapi/strapi-dev` folder copy and rename the `.env.example` file to `.env`
 - Go to `strapi/strapi-prod` folder copy and rename the `.env.example` file to `.env`
 - Go to `payloadcms/payloadcms-dev` folder copy and rename the `.env.example` file to `.env`
@@ -44,7 +47,6 @@ cd next-app && npm run dev
 cd cms-service && npm run start:dev
 cd payloadcms/payloadcms-dev && npm run dev
 cd payloadcms/payloadcms-prod && npm run dev
-cd cms-service && npm run start:dev
 ```
 
 - The strapi admin for DEV will be available at http://localhost:1337/admin
