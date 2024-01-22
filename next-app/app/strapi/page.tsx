@@ -1,9 +1,19 @@
-const StrapiPage = () => {
+"use client"
+import {getForm} from "@/app/actions/getForm";
+// @ts-ignore
+
+import {FormBuilder} from "@guidesmiths/react-form-builder"
+
+const StrapiPage = async () => {
+    const {form} = await getForm()
     return (
         <div className="flex items-center justify-center max-h-full h-screen">
-            <h1> Strapi </h1>
+            <div className="flex">
+                {form && <FormBuilder form={form} onSubmit={() => console.log("sent")}/>}
+            </div>
         </div>
     )
 }
+
 
 export default StrapiPage
