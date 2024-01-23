@@ -1,0 +1,35 @@
+{
+  "name": "lab-strapi",
+  "version": "1.0.0",
+  "description": "POC to compare different CMSs (Strapi vs PayloadCMS)",
+  "workspaces": [
+    "cms-service",
+    "localstack",
+    "mongo",
+    "postgres",
+    "next-app",
+    "strapi/strapi-dev",
+    "strapi/strapi-prod",
+    "payloadcms/payloadcms-dev",
+    "payloadcms/payloadcms-prod"
+  ],
+  "scripts": {
+    "infra:up": "npm run infra:up --workspaces --if-present",
+    "infra:down": "npm run infra:down --workspaces --if-present"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/inigomarquinez/lab-strapi.git"
+  },
+  "keywords": [
+    "cms",
+    "strapi",
+    "payloadcms"
+  ],
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/inigomarquinez/lab-strapi/issues"
+  },
+  "homepage": "https://github.com/inigomarquinez/lab-strapi#readme"
+}
