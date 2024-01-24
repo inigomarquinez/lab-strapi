@@ -9,9 +9,9 @@
 export interface Config {
   collections: {
     users: User;
+    sites: Site;
     'contact-requests': ContactRequest;
     media: Media;
-    sites: Site;
     forms: Form;
     'form-questions': FormQuestion;
     'form-call-for-actions': FormCallForAction;
@@ -20,8 +20,7 @@ export interface Config {
     'form-configs': FormConfig;
     'form-options': FormOption;
     'form-dependent-questions': FormDependentQuestion;
-    pages1: Pages1;
-    pages2: Pages2;
+    pages: Page;
     'payload-preferences': PayloadPreference;
     'payload-migrations': PayloadMigration;
   };
@@ -29,10 +28,17 @@ export interface Config {
 }
 export interface User {
   id: string;
-  firstName: string;
-  lastName: string;
-  roles?: ('admin' | 'editor')[] | null;
-  sites?: (string | Site)[] | null;
+  firstName?: string | null;
+  lastName?: string | null;
+  roles: ('super-admin' | 'user')[];
+  sites?:
+    | {
+        site: string | Site;
+        roles: ('admin' | 'user')[];
+        id?: string | null;
+      }[]
+    | null;
+  lastLoggedInSite?: (string | null) | Site;
   updatedAt: string;
   createdAt: string;
   email: string;
@@ -46,20 +52,27 @@ export interface User {
 }
 export interface Site {
   id: string;
-  title: string;
+  name: string;
+  domains?:
+    | {
+        domain: string;
+        id?: string | null;
+      }[]
+    | null;
   updatedAt: string;
   createdAt: string;
 }
 export interface ContactRequest {
   id: string;
   message: string;
+  site?: (string | null) | Site;
   updatedAt: string;
   createdAt: string;
 }
 export interface Media {
   id: string;
   alt: string;
-  site: string | Site;
+  site?: (string | null) | Site;
   updatedAt: string;
   createdAt: string;
   url?: string | null;
@@ -76,6 +89,7 @@ export interface Form {
   enabled?: boolean | null;
   questions?: (string | FormQuestion)[] | null;
   callForActions?: (string | null) | FormCallForAction;
+  site?: (string | null) | Site;
   updatedAt: string;
   createdAt: string;
   _status?: ('draft' | 'published') | null;
@@ -91,6 +105,7 @@ export interface FormQuestion {
   errorMessages?: (string | null) | FormErrorMessage;
   priorityOptions?: string[] | null;
   dependentQuestions?: (string | null) | FormDependentQuestion;
+  site?: (string | null) | Site;
   updatedAt: string;
   createdAt: string;
   _status?: ('draft' | 'published') | null;
@@ -99,6 +114,7 @@ export interface FormConfig {
   id: string;
   name: string;
   options: (string | FormOption)[];
+  site?: (string | null) | Site;
   updatedAt: string;
   createdAt: string;
   _status?: ('draft' | 'published') | null;
@@ -107,6 +123,7 @@ export interface FormOption {
   id: string;
   label: string;
   value: string;
+  site?: (string | null) | Site;
   updatedAt: string;
   createdAt: string;
   _status?: ('draft' | 'published') | null;
@@ -118,6 +135,7 @@ export interface FormRegisterConfig {
   maximumLen?: number | null;
   minimumLen?: number | null;
   pattern?: string | null;
+  site?: (string | null) | Site;
   updatedAt: string;
   createdAt: string;
   _status?: ('draft' | 'published') | null;
@@ -129,6 +147,7 @@ export interface FormErrorMessage {
   maximumLen?: string | null;
   minimumLen?: string | null;
   pattern?: string | null;
+  site?: (string | null) | Site;
   updatedAt: string;
   createdAt: string;
   _status?: ('draft' | 'published') | null;
@@ -138,6 +157,7 @@ export interface FormDependentQuestion {
   name: string;
   conditions: string[];
   questions: string | FormQuestion;
+  site?: (string | null) | Site;
   updatedAt: string;
   createdAt: string;
   _status?: ('draft' | 'published') | null;
@@ -147,31 +167,18 @@ export interface FormCallForAction {
   name: string;
   caption: string;
   type: 'submit';
+  site?: (string | null) | Site;
   updatedAt: string;
   createdAt: string;
   _status?: ('draft' | 'published') | null;
 }
-export interface Pages1 {
+export interface Page {
   id: string;
-  name: string;
-  title?: string | null;
-  backgroundImage?: (string | null) | Media;
-  form: string | Form;
-  site: string | Site;
+  title: string;
+  slug?: string | null;
+  site?: (string | null) | Site;
   updatedAt: string;
   createdAt: string;
-  _status?: ('draft' | 'published') | null;
-}
-export interface Pages2 {
-  id: string;
-  name: string;
-  title?: string | null;
-  backgroundImage?: (string | null) | Media;
-  form: string | Form;
-  site: string | Site;
-  updatedAt: string;
-  createdAt: string;
-  _status?: ('draft' | 'published') | null;
 }
 export interface PayloadPreference {
   id: string;

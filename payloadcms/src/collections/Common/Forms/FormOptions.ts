@@ -1,4 +1,8 @@
 import { CollectionConfig } from "payload/types";
+import { loggedIn } from "../access/loggedIn";
+import { siteAdmins } from "../access/siteAdmins";
+import { sites } from "../access/sites";
+import { site } from "../../fields/site";
 
 const FormOptions: CollectionConfig = {
   slug: "form-options",
@@ -12,7 +16,12 @@ const FormOptions: CollectionConfig = {
   versions: {
     drafts: true,
   },
-  access: {},
+  access: {
+    read: sites,
+    create: loggedIn,
+    update: siteAdmins,
+    delete: siteAdmins,
+  },
   fields: [
     {
       name: "label",
@@ -27,6 +36,7 @@ const FormOptions: CollectionConfig = {
       type: "text",
       required: true,
     },
+    site,
   ],
 };
 export default FormOptions;

@@ -1,4 +1,8 @@
 import { CollectionConfig } from "payload/types";
+import { loggedIn } from "../access/loggedIn";
+import { siteAdmins } from "../access/siteAdmins";
+import { sites } from "../access/sites";
+import { site } from "../../fields/site";
 
 const ErrorMessages: CollectionConfig = {
   slug: "form-error-messages",
@@ -12,7 +16,12 @@ const ErrorMessages: CollectionConfig = {
   versions: {
     drafts: true,
   },
-  access: {},
+  access: {
+    read: sites,
+    create: loggedIn,
+    update: siteAdmins,
+    delete: siteAdmins,
+  },
   fields: [
     {
       name: "name",
@@ -45,6 +54,7 @@ const ErrorMessages: CollectionConfig = {
       localized: true,
       type: "text",
     },
+    site,
   ],
 };
 export default ErrorMessages;

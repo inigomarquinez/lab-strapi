@@ -1,5 +1,6 @@
 import { CollectionConfig } from "payload/types";
-import { isAdmin } from "../../access/isAdmin";
+import { siteAdmins } from "./access/siteAdmins";
+import { site } from "../fields/site";
 
 const ContactRequests: CollectionConfig = {
   slug: "contact-requests",
@@ -9,7 +10,7 @@ const ContactRequests: CollectionConfig = {
     // No one can update, ever
     update: () => false,
     // Only admins can read
-    read: isAdmin,
+    read: siteAdmins,
     // No one can delete, ever
     delete: () => false,
   },
@@ -19,6 +20,7 @@ const ContactRequests: CollectionConfig = {
       type: "textarea",
       required: true,
     },
+    site,
   ],
 };
 

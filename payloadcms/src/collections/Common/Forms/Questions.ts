@@ -1,4 +1,8 @@
 import { CollectionConfig } from "payload/types";
+import { loggedIn } from "../access/loggedIn";
+import { siteAdmins } from "../access/siteAdmins";
+import { sites } from "../access/sites";
+import { site } from "../../fields/site";
 
 const Questions: CollectionConfig = {
   slug: "form-questions",
@@ -12,7 +16,12 @@ const Questions: CollectionConfig = {
   versions: {
     drafts: true,
   },
-  access: {},
+  access: {
+    read: sites,
+    create: loggedIn,
+    update: siteAdmins,
+    delete: siteAdmins,
+  },
   fields: [
     {
       name: "name",
@@ -95,6 +104,7 @@ const Questions: CollectionConfig = {
         condition: (_, siblingData) => siblingData.type !== "markdown",
       },
     },
+    site,
   ],
 };
 export default Questions;
