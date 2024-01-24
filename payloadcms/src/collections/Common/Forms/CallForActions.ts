@@ -23,6 +23,7 @@ const CallForActions: CollectionConfig = {
     {
       name: "caption",
       label: "Caption",
+      localized: true,
       type: "text",
       required: true,
     },

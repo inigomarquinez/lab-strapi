@@ -35,6 +35,20 @@ const config: Config = {
     ...Site1Collections,
     ...Site2Collections,
   ],
+  localization: {
+    locales: [
+      {
+        label: "English",
+        code: "en",
+      },
+      {
+        label: "Spanish",
+        code: "es",
+      },
+    ],
+    defaultLocale: "en",
+    fallback: false,
+  },
   typescript: {
     outputFile: path.resolve(__dirname, "payload-types.ts"),
   },

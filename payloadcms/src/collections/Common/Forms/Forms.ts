@@ -28,11 +28,13 @@ const Forms: CollectionConfig = {
     {
       name: "titleForm",
       label: "Title",
+      localized: true,
       type: "text",
     },
     {
       name: "enabled",
       label: "Enabled",
+      localized: true,
       type: "checkbox",
       defaultValue: true,
     },

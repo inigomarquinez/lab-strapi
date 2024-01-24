@@ -1,5 +1,4 @@
 import { CollectionConfig } from "payload/types";
-import { isAdmin } from "../../access/isAdmin";
 import { isAdminOrHasSiteAccess } from "../../access/isAdminOrHasSiteAccess";
 import { isLoggedIn } from "../../access/isLoggedIn";
 

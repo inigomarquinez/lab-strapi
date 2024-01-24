@@ -17,6 +17,7 @@ const FormOptions: CollectionConfig = {
     {
       name: "label",
       label: "Label",
+      localized: true,
       type: "text",
       required: true,
     },

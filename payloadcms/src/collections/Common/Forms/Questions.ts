@@ -36,11 +36,13 @@ const Questions: CollectionConfig = {
     {
       name: "label",
       label: "Label",
+      localized: true,
       type: "text",
     },
     {
       name: "placeholder",
       label: "Placeholder",
+      localized: true,
       type: "text",
       admin: {
         condition: (_, siblingData) => siblingData.type !== "markdown",
@@ -77,6 +79,7 @@ const Questions: CollectionConfig = {
     {
       name: "priorityOptions",
       label: "Priority Options",
+      localized: true,
       type: "text",
       hasMany: true,
       admin: {
