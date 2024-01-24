@@ -13,14 +13,14 @@ module.exports = ({ env }) => ([
             'data:',
             'blob:',
             'dl.airtable.com',
-            'strapi-dev-bucket.s3.localhost.localstack.cloud:4566',
+            `${env('AWS_BUCKET')}.s3.localhost.localstack.cloud:4566`
           ],
           'media-src': [
             "'self'",
             'data:',
             'blob:',
             'dl.airtable.com',
-            'strapi-dev-bucket.s3.localhost.localstack.cloud:4566',
+            `${env('AWS_BUCKET')}.s3.localhost.localstack.cloud:4566`
           ],
           upgradeInsecureRequests: null,
         },

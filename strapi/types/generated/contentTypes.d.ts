@@ -768,6 +768,243 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
   };
 }
 
+export interface ApiClientOneMetadataClientOneMetadata
+  extends Schema.CollectionType {
+  collectionName: 'client_one_metadatas';
+  info: {
+    singularName: 'client-one-metadata';
+    pluralName: 'client-one-metadatas';
+    displayName: 'client_one_metadata';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    json: Attribute.JSON;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::client-one-metadata.client-one-metadata',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::client-one-metadata.client-one-metadata',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiClientOneModelClientOneModel extends Schema.CollectionType {
+  collectionName: 'client_one_models';
+  info: {
+    singularName: 'client-one-model';
+    pluralName: 'client-one-models';
+    displayName: 'client_one_model';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    name: Attribute.String;
+    email: Attribute.String;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::client-one-model.client-one-model',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::client-one-model.client-one-model',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiClientTwoModelClientTwoModel extends Schema.CollectionType {
+  collectionName: 'client_two_models';
+  info: {
+    singularName: 'client-two-model';
+    pluralName: 'client-two-models';
+    displayName: 'client_two_model';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    name: Attribute.String;
+    user_id: Attribute.String;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::client-two-model.client-two-model',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::client-two-model.client-two-model',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiFormForm extends Schema.CollectionType {
+  collectionName: 'forms';
+  info: {
+    singularName: 'form';
+    pluralName: 'forms';
+    displayName: 'form';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    csmInternal: Attribute.String & Attribute.Required & Attribute.Private;
+    name: Attribute.String & Attribute.Required;
+    title: Attribute.String & Attribute.Required;
+    enabled: Attribute.Boolean & Attribute.Required & Attribute.DefaultTo<true>;
+    questions: Attribute.Relation<
+      'api::form.form',
+      'oneToMany',
+      'api::question.question'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<'api::form.form', 'oneToOne', 'admin::user'> &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<'api::form.form', 'oneToOne', 'admin::user'> &
+      Attribute.Private;
+  };
+}
+
+export interface ApiLayoutLayout extends Schema.CollectionType {
+  collectionName: 'layouts';
+  info: {
+    singularName: 'layout';
+    pluralName: 'layouts';
+    displayName: 'layout';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    csmInternal: Attribute.String & Attribute.Required & Attribute.Private;
+    name: Attribute.String & Attribute.Required;
+    title: Attribute.String & Attribute.Required;
+    backgroundImage: Attribute.Media;
+    form: Attribute.Relation<
+      'api::layout.layout',
+      'oneToOne',
+      'api::form.form'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::layout.layout',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::layout.layout',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiQuestionQuestion extends Schema.CollectionType {
+  collectionName: 'questions';
+  info: {
+    singularName: 'question';
+    pluralName: 'questions';
+    displayName: 'question';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    csmInternal: Attribute.String & Attribute.Required & Attribute.Private;
+    name: Attribute.String & Attribute.Required;
+    type: Attribute.Enumeration<['markdown', 'input', 'country']>;
+    label: Attribute.String;
+    registerConfig: Attribute.Relation<
+      'api::question.question',
+      'oneToOne',
+      'api::register-config.register-config'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::question.question',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::question.question',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiRegisterConfigRegisterConfig extends Schema.CollectionType {
+  collectionName: 'register_configs';
+  info: {
+    singularName: 'register-config';
+    pluralName: 'register-configs';
+    displayName: 'RegisterConfig';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    csmInternal: Attribute.String;
+    required: Attribute.Boolean &
+      Attribute.Required &
+      Attribute.DefaultTo<true>;
+    pattern: Attribute.String;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::register-config.register-config',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::register-config.register-config',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 declare module '@strapi/types' {
   export module Shared {
     export interface ContentTypes {
@@ -786,6 +1023,13 @@ declare module '@strapi/types' {
       'plugin::users-permissions.permission': PluginUsersPermissionsPermission;
       'plugin::users-permissions.role': PluginUsersPermissionsRole;
       'plugin::users-permissions.user': PluginUsersPermissionsUser;
+      'api::client-one-metadata.client-one-metadata': ApiClientOneMetadataClientOneMetadata;
+      'api::client-one-model.client-one-model': ApiClientOneModelClientOneModel;
+      'api::client-two-model.client-two-model': ApiClientTwoModelClientTwoModel;
+      'api::form.form': ApiFormForm;
+      'api::layout.layout': ApiLayoutLayout;
+      'api::question.question': ApiQuestionQuestion;
+      'api::register-config.register-config': ApiRegisterConfigRegisterConfig;
     }
   }
 }
