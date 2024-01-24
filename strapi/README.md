@@ -1,4 +1,18 @@
-# 🚀 Getting started with Strapi
+# strapi
+
+To launch DEV and PROD servers
+
+```bash
+npm run pm2:run
+```
+
+To see the logs navigate [here](https://app.pm2.io/)
+
+To see the admin panels 
+  - DEV navigate [here](http://localhost:1337/admin)
+  - PROD navigate [here](http://localhost:1338/admin)
+
+## 🚀 Getting started with Strapi
 
 Strapi comes with a full featured [Command Line Interface](https://docs.strapi.io/dev-docs/cli) (CLI) which lets you scaffold and manage your project in seconds.
 
