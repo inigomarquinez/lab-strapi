@@ -8,6 +8,6 @@ export const sites: Access = ({ req: { user }, data }) =>
   (!user?.lastLoggedInSite?.id && isSuperAdmin(user)) || {
     // list of documents
     site: {
-      equals: user?.lastLoggedInSite?.id,
+      equals: "65b15435d783613fc93e6b62",
     },
   };

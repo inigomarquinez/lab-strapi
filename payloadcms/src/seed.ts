@@ -1,17 +1,19 @@
 import { Payload } from "payload";
+import { site } from "./collections/fields/site";
 
 export const seed = async (payload: Payload): Promise<void> => {
   const site1 = await payload.create<"sites">({
     collection: "sites",
     data: {
-      title: "Site 1",
+      name: "Site 1",
+      domains: [{ domain: "site1.local", id: "site1" }],
     },
   });
-
   const site2 = await payload.create<"sites">({
     collection: "sites",
     data: {
-      title: "Site 2",
+      name: "Site 2",
+      domains: [{ domain: "site2.local", id: "site2" }],
     },
   });
 
@@ -20,33 +22,47 @@ export const seed = async (payload: Payload): Promise<void> => {
   await payload.create<"users">({
     collection: "users",
     data: {
-      email: "dev@payloadcms.com",
+      email: "dev@admin.local",
       password: "test",
       firstName: "Payload",
       lastName: "CMS",
-      roles: ["admin"],
+      roles: ["super-admin"],
     },
   });
   // This user will be created with the default role of `editor`
   await payload.create<"users">({
     collection: "users",
     data: {
-      email: "site1@payloadcms.com",
+      email: "dev@site1.local",
       password: "test",
       firstName: "Site1",
       lastName: "User",
-      sites: [site1.id],
+      roles: ["user"],
+      sites: [
+        {
+          site: site1.id,
+          roles: ["admin"],
+        },
+      ],
+      lastLoggedInSite: site1.id,
     },
   });
   // This user will be created with the default role of `editor`
   await payload.create<"users">({
     collection: "users",
     data: {
-      email: "site2@payloadcms.com",
+      email: "dev@site2.local",
       password: "test",
-      firstName: "Site2",
+      firstName: "Site1",
       lastName: "User",
-      sites: [site2.id],
+      roles: ["user"],
+      sites: [
+        {
+          site: site2.id,
+          roles: ["admin"],
+        },
+      ],
+      lastLoggedInSite: site2.id,
     },
   });
 
@@ -60,6 +76,7 @@ export const seed = async (payload: Payload): Promise<void> => {
       _status: "published",
       createdAt: "2024-01-24T07:49:50.399Z",
       updatedAt: "2024-01-24T07:49:50.399Z",
+      site: site1.id,
     },
   });
 
@@ -75,6 +92,7 @@ export const seed = async (payload: Payload): Promise<void> => {
       _status: "published",
       createdAt: "2024-01-24T07:40:46.234Z",
       updatedAt: "2024-01-24T07:40:46.234Z",
+      site: site1.id,
     },
   });
 
@@ -87,6 +105,7 @@ export const seed = async (payload: Payload): Promise<void> => {
       _status: "published",
       createdAt: "2024-01-24T07:41:17.111Z",
       updatedAt: "2024-01-24T07:41:17.111Z",
+      site: site1.id,
     },
   });
 
@@ -99,6 +118,7 @@ export const seed = async (payload: Payload): Promise<void> => {
       _status: "published",
       createdAt: "2024-01-24T07:41:33.344Z",
       updatedAt: "2024-01-24T07:41:33.344Z",
+      site: site1.id,
     },
   });
 
@@ -116,6 +136,7 @@ export const seed = async (payload: Payload): Promise<void> => {
       _status: "published",
       createdAt: "2024-01-24T07:41:40.181Z",
       updatedAt: "2024-01-24T07:41:40.181Z",
+      site: site1.id,
     },
   });
 
@@ -133,6 +154,7 @@ export const seed = async (payload: Payload): Promise<void> => {
       _status: "published",
       createdAt: "2024-01-24T07:42:04.323Z",
       updatedAt: "2024-01-24T07:42:04.323Z",
+      site: site1.id,
     },
   });
 
@@ -147,6 +169,7 @@ export const seed = async (payload: Payload): Promise<void> => {
       _status: "published",
       createdAt: "2024-01-24T07:42:47.822Z",
       updatedAt: "2024-01-24T07:42:47.822Z",
+      site: site1.id,
     },
   });
 
@@ -160,6 +183,7 @@ export const seed = async (payload: Payload): Promise<void> => {
       _status: "published",
       createdAt: "2024-01-24T07:43:08.537Z",
       updatedAt: "2024-01-24T07:43:08.537Z",
+      site: site1.id,
     },
   });
   // Email
@@ -176,6 +200,7 @@ export const seed = async (payload: Payload): Promise<void> => {
       _status: "published",
       createdAt: "2024-01-24T07:43:11.346Z",
       updatedAt: "2024-01-24T07:43:11.346Z",
+      site: site1.id,
     },
   });
 
@@ -188,6 +213,7 @@ export const seed = async (payload: Payload): Promise<void> => {
       _status: "published",
       createdAt: "2024-01-24T07:47:42.620Z",
       updatedAt: "2024-01-24T07:47:42.620Z",
+      site: site1.id,
     },
   });
   const optionVietnam2 = await payload.create<"form-options">({
@@ -199,6 +225,7 @@ export const seed = async (payload: Payload): Promise<void> => {
       _status: "published",
       createdAt: "2024-01-24T07:48:01.866Z",
       updatedAt: "2024-01-24T07:48:01.866Z",
+      site: site1.id,
     },
   });
   const configVietnamRegion = await payload.create<"form-configs">({
@@ -210,6 +237,7 @@ export const seed = async (payload: Payload): Promise<void> => {
       _status: "published",
       createdAt: "2024-01-24T07:48:04.552Z",
       updatedAt: "2024-01-24T07:48:04.552Z",
+      site: site1.id,
     },
   });
   const questionVietnamRegion = await payload.create<"form-questions">({
@@ -227,6 +255,7 @@ export const seed = async (payload: Payload): Promise<void> => {
       _status: "published",
       createdAt: "2024-01-24T07:48:23.790Z",
       updatedAt: "2024-01-24T07:48:23.790Z",
+      site: site1.id,
     },
   });
 
@@ -240,6 +269,7 @@ export const seed = async (payload: Payload): Promise<void> => {
       _status: "published",
       createdAt: "2024-01-24T07:48:27.356Z",
       updatedAt: "2024-01-24T07:48:27.356Z",
+      site: site1.id,
     },
   });
   const question5 = await payload.create<"form-questions">({
@@ -257,6 +287,7 @@ export const seed = async (payload: Payload): Promise<void> => {
       errorMessages: requiredErrorMessage.id,
       placeholder: "Country of Residence*",
       dependentQuestions: dependentQuestion.id,
+      site: site1.id,
     },
   });
 
@@ -279,6 +310,7 @@ export const seed = async (payload: Payload): Promise<void> => {
         question4.id,
         question5.id,
       ],
+      site: site1.id,
     },
   });
 
@@ -288,12 +320,11 @@ export const seed = async (payload: Payload): Promise<void> => {
     data: {
       id: "65b0becc2f80d6edf6ed2231",
       name: "Enter to Win user contact form layout",
-      title: "Title",
+      form: form.id,
       site: site1.id,
       _status: "published",
       createdAt: "2024-01-24T07:39:56.973Z",
       updatedAt: "2024-01-24T07:59:01.524Z",
-      form: form.id,
     },
     depth: 99,
   });

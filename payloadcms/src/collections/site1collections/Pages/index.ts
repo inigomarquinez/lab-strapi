@@ -1,26 +1,31 @@
 import type { CollectionConfig } from "payload/types";
 
 import { site } from "../../fields/site";
-import { loggedIn } from "./access/loggedIn";
-import { siteAdmins } from "./access/siteAdmins";
-import { sites } from "./access/sites";
+import loggedInInSite1 from "./access/loggedInInSite1";
 import formatSlug from "./hooks/formatSlug";
 
 const Pages: CollectionConfig = {
-  slug: "pages",
+  slug: "pages1",
+  labels: {
+    singular: "Page1",
+    plural: "Pages1",
+  },
   admin: {
     useAsTitle: "title",
     defaultColumns: ["title", "slug", "updatedAt"],
   },
   access: {
-    read: sites,
-    create: loggedIn,
-    update: siteAdmins,
-    delete: siteAdmins,
+    read: loggedInInSite1,
+    create: loggedInInSite1,
+    update: loggedInInSite1,
+    delete: loggedInInSite1,
+  },
+  versions: {
+    drafts: true,
   },
   fields: [
     {
-      name: "title",
+      name: "name",
       type: "text",
       required: true,
     },
@@ -35,6 +40,13 @@ const Pages: CollectionConfig = {
       hooks: {
         beforeValidate: [formatSlug("title")],
       },
+    },
+    {
+      name: "form",
+      type: "relationship",
+      relationTo: "forms",
+      hasMany: false,
+      required: true,
     },
     site,
   ],

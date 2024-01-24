@@ -10,16 +10,7 @@ export const siteAdmins: Access = ({ req: { user } }) => {
 
   return {
     site: {
-      in:
-        user?.sites
-          ?.map(({ site, roles }) =>
-            roles.includes("admin")
-              ? typeof site === "string"
-                ? site
-                : site.id
-              : null
-          ) // eslint-disable-line function-paren-newline
-          .filter(Boolean) || [],
+      in: ["65b15435d783613fc93e6b62"],
     },
   };
 };

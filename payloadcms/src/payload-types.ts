@@ -20,7 +20,7 @@ export interface Config {
     'form-configs': FormConfig;
     'form-options': FormOption;
     'form-dependent-questions': FormDependentQuestion;
-    pages: Page;
+    pages1: Pages1;
     'payload-preferences': PayloadPreference;
     'payload-migrations': PayloadMigration;
   };
@@ -172,13 +172,15 @@ export interface FormCallForAction {
   createdAt: string;
   _status?: ('draft' | 'published') | null;
 }
-export interface Page {
+export interface Pages1 {
   id: string;
-  title: string;
+  name: string;
   slug?: string | null;
+  form: string | Form;
   site?: (string | null) | Site;
   updatedAt: string;
   createdAt: string;
+  _status?: ('draft' | 'published') | null;
 }
 export interface PayloadPreference {
   id: string;
