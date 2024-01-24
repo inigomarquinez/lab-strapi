@@ -3,15 +3,17 @@ import path from "path";
 import { mongooseAdapter } from "@payloadcms/db-mongodb";
 import { webpackBundler } from "@payloadcms/bundler-webpack";
 import { slateEditor } from "@payloadcms/richtext-slate";
-import { buildConfig } from "payload/config";
+import { Config, buildConfig } from "payload/config";
 import { cloudStorage } from "@payloadcms/plugin-cloud-storage";
 import { s3Adapter } from "@payloadcms/plugin-cloud-storage/s3";
 
 import Users from "./collections/Users";
-import Images from "./collections/Images";
-import Media from "./collections/Media";
+import CommonCollections from "./collections/Common";
+import Site1Collections from "./collections/site1collections";
+import Site2Collections from "./collections/site2collections";
+import { seed } from "./seed";
 
-export default buildConfig({
+const config: Config = {
   admin: {
     user: Users.slug,
     bundler: webpackBundler(),
@@ -27,12 +29,14 @@ export default buildConfig({
     }),
   },
   editor: slateEditor({}),
-  collections: [Users, Images, Media],
+  collections: [
+    Users,
+    ...CommonCollections,
+    ...Site1Collections,
+    ...Site2Collections,
+  ],
   typescript: {
     outputFile: path.resolve(__dirname, "payload-types.ts"),
-  },
-  graphQL: {
-    schemaOutputFile: path.resolve(__dirname, "generated-schema.graphql"),
   },
   plugins: [
     cloudStorage({
@@ -58,4 +62,11 @@ export default buildConfig({
   db: mongooseAdapter({
     url: process.env.DATABASE_URI,
   }),
-});
+  onInit: async (payload) => {
+    if (process.env.PAYLOAD_SEED) {
+      await seed(payload);
+    }
+  },
+};
+
+export default buildConfig(config);
