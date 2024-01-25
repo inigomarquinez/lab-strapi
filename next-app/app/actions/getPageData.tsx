@@ -1,10 +1,14 @@
 import {NextResponse} from "next/server";
+import {PageDataModel} from "@/app/actions/models";
 
-export async function getForm() {
+
+
+
+export async function getPageData():Promise<PageDataModel> {
     return {
             "name": "Enter to Win user contact form layout",
             "title": "Title",
-            "backgroundImage": "https://images.ctfassets.net/zq302znxt4f0/3O5DdkfB1RJ0VFUIXdoaNZ/d409ccba7055f9a3f1fe2ba39eecf268/whatever.png",
+            "backgroundImage": "https://images.ctfassets.net/zq302znxt4f0/3O5DdkfB1RJ0VFUIXdoaNZ/999cf3a3dcf8c1f2db021809fda75aa2/background.png",
             "form": {
                 "name": "Enter To Win user contact form",
                 "id": 5,
