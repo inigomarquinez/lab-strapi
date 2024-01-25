@@ -9,7 +9,7 @@ const StrapiPage = async () => {
     return (
         <div className="flex items-center justify-center max-h-full h-screen">
             <div className="flex">
-                {form && <FormBuilder form={form} onSubmit={() => console.log("sent")}/>}
+                {form && <FormBuilder form={form} onSubmit={(submittedData:any) => console.log(submittedData)}/>}
             </div>
         </div>
     )
