@@ -8,9 +8,9 @@ import { cloudStorage } from "@payloadcms/plugin-cloud-storage";
 import { s3Adapter } from "@payloadcms/plugin-cloud-storage/s3";
 
 import Users from "./collections/Users";
+import Sites from "./collections/Sites";
 import CommonCollections from "./collections/Common";
 import Site1Collections from "./collections/site1collections";
-import Site2Collections from "./collections/site2collections";
 import { seed } from "./seed";
 
 const config: Config = {
@@ -31,9 +31,9 @@ const config: Config = {
   editor: slateEditor({}),
   collections: [
     Users,
+    Sites, // Tenants
     ...CommonCollections,
     ...Site1Collections,
-    ...Site2Collections,
   ],
   localization: {
     locales: [
