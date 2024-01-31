@@ -1,0 +1,40 @@
+{
+  "kind": "collectionType",
+  "collectionName": "site1_layouts",
+  "info": {
+    "singularName": "site1-layout",
+    "pluralName": "site1-layouts",
+    "displayName": "site1_layout",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {
+    "i18n": {
+      "localized": true
+    }
+  },
+  "attributes": {
+    "internal_name": {
+      "pluginOptions": {
+        "i18n": {
+          "localized": false
+        }
+      },
+      "type": "string",
+      "required": true
+    },
+    "site_1_form": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::site1-form.site1-form"
+    },
+    "site": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::site.site",
+      "private": true
+    }
+  }
+}
