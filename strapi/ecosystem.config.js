@@ -4,7 +4,7 @@ module.exports = {
       name: 'strapi_dev_server',
       cwd: '.',
       script: 'npm',
-      args: 'start',
+      args: 'run develop',
       env: {
         NODE_ENV: 'dev_server',
         PORT: 1337,
@@ -17,7 +17,7 @@ module.exports = {
       name: 'strapi_prod_server',
       cwd: '.',
       script: 'npm',
-      args: 'start',
+      args: 'run develop',
       env: {
         NODE_ENV: 'prod_server',
         PORT: 1338,

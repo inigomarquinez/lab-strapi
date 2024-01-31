@@ -768,99 +768,6 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
   };
 }
 
-export interface ApiClientOneMetadataClientOneMetadata
-  extends Schema.CollectionType {
-  collectionName: 'client_one_metadatas';
-  info: {
-    singularName: 'client-one-metadata';
-    pluralName: 'client-one-metadatas';
-    displayName: 'client_one_metadata';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    json: Attribute.JSON;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'api::client-one-metadata.client-one-metadata',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'api::client-one-metadata.client-one-metadata',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-  };
-}
-
-export interface ApiClientOneModelClientOneModel extends Schema.CollectionType {
-  collectionName: 'client_one_models';
-  info: {
-    singularName: 'client-one-model';
-    pluralName: 'client-one-models';
-    displayName: 'client_one_model';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    name: Attribute.String;
-    email: Attribute.String;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'api::client-one-model.client-one-model',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'api::client-one-model.client-one-model',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-  };
-}
-
-export interface ApiClientTwoModelClientTwoModel extends Schema.CollectionType {
-  collectionName: 'client_two_models';
-  info: {
-    singularName: 'client-two-model';
-    pluralName: 'client-two-models';
-    displayName: 'client_two_model';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    name: Attribute.String;
-    user_id: Attribute.String;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'api::client-two-model.client-two-model',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'api::client-two-model.client-two-model',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-  };
-}
-
 export interface ApiFormForm extends Schema.CollectionType {
   collectionName: 'forms';
   info: {
@@ -872,16 +779,40 @@ export interface ApiFormForm extends Schema.CollectionType {
   options: {
     draftAndPublish: true;
   };
+  pluginOptions: {
+    i18n: {
+      localized: true;
+    };
+  };
   attributes: {
-    csmInternal: Attribute.String & Attribute.Required & Attribute.Private;
-    name: Attribute.String & Attribute.Required;
-    title: Attribute.String & Attribute.Required;
-    enabled: Attribute.Boolean & Attribute.Required & Attribute.DefaultTo<true>;
+    internal_name: Attribute.String &
+      Attribute.Required &
+      Attribute.Private &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: false;
+        };
+      }>;
+    name: Attribute.String &
+      Attribute.Required &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    site: Attribute.Relation<'api::form.form', 'oneToOne', 'api::site.site'> &
+      Attribute.Private;
     questions: Attribute.Relation<
       'api::form.form',
       'oneToMany',
       'api::question.question'
     >;
+    title: Attribute.Blocks &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -889,6 +820,12 @@ export interface ApiFormForm extends Schema.CollectionType {
       Attribute.Private;
     updatedBy: Attribute.Relation<'api::form.form', 'oneToOne', 'admin::user'> &
       Attribute.Private;
+    localizations: Attribute.Relation<
+      'api::form.form',
+      'oneToMany',
+      'api::form.form'
+    >;
+    locale: Attribute.String;
   };
 }
 
@@ -904,10 +841,16 @@ export interface ApiLayoutLayout extends Schema.CollectionType {
     draftAndPublish: true;
   };
   attributes: {
-    csmInternal: Attribute.String & Attribute.Required & Attribute.Private;
+    internal_name: Attribute.String & Attribute.Required & Attribute.Private;
     name: Attribute.String & Attribute.Required;
     title: Attribute.String & Attribute.Required;
-    backgroundImage: Attribute.Media;
+    enabled: Attribute.Boolean & Attribute.Required & Attribute.DefaultTo<true>;
+    site: Attribute.Relation<
+      'api::layout.layout',
+      'oneToOne',
+      'api::site.site'
+    > &
+      Attribute.Private;
     form: Attribute.Relation<
       'api::layout.layout',
       'oneToOne',
@@ -943,15 +886,17 @@ export interface ApiQuestionQuestion extends Schema.CollectionType {
     draftAndPublish: true;
   };
   attributes: {
-    csmInternal: Attribute.String & Attribute.Required & Attribute.Private;
+    internal_name: Attribute.String & Attribute.Required & Attribute.Private;
     name: Attribute.String & Attribute.Required;
-    type: Attribute.Enumeration<['markdown', 'input', 'country']>;
+    type: Attribute.Enumeration<['input', 'markdown']> & Attribute.Required;
     label: Attribute.String;
-    registerConfig: Attribute.Relation<
+    placeholder: Attribute.String;
+    site: Attribute.Relation<
       'api::question.question',
       'oneToOne',
-      'api::register-config.register-config'
-    >;
+      'api::site.site'
+    > &
+      Attribute.Private;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -970,34 +915,257 @@ export interface ApiQuestionQuestion extends Schema.CollectionType {
   };
 }
 
-export interface ApiRegisterConfigRegisterConfig extends Schema.CollectionType {
-  collectionName: 'register_configs';
+export interface ApiSiteSite extends Schema.CollectionType {
+  collectionName: 'sites';
   info: {
-    singularName: 'register-config';
-    pluralName: 'register-configs';
-    displayName: 'RegisterConfig';
-    description: '';
+    singularName: 'site';
+    pluralName: 'sites';
+    displayName: 'site';
   };
   options: {
     draftAndPublish: true;
   };
   attributes: {
-    csmInternal: Attribute.String;
-    required: Attribute.Boolean &
+    name: Attribute.String & Attribute.Required & Attribute.Unique;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<'api::site.site', 'oneToOne', 'admin::user'> &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<'api::site.site', 'oneToOne', 'admin::user'> &
+      Attribute.Private;
+  };
+}
+
+export interface ApiSite1FormSite1Form extends Schema.CollectionType {
+  collectionName: 'site1_forms';
+  info: {
+    singularName: 'site1-form';
+    pluralName: 'site1-forms';
+    displayName: 'site1_form';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  pluginOptions: {
+    i18n: {
+      localized: true;
+    };
+  };
+  attributes: {
+    internal_name: Attribute.String &
       Attribute.Required &
-      Attribute.DefaultTo<true>;
-    pattern: Attribute.String;
+      Attribute.Private &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: false;
+        };
+      }>;
+    title: Attribute.String &
+      Attribute.Required &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    site: Attribute.Relation<
+      'api::site1-form.site1-form',
+      'oneToOne',
+      'api::site.site'
+    > &
+      Attribute.Private;
+    questions: Attribute.Relation<
+      'api::site1-form.site1-form',
+      'oneToMany',
+      'api::question.question'
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<
-      'api::register-config.register-config',
+      'api::site1-form.site1-form',
       'oneToOne',
       'admin::user'
     > &
       Attribute.Private;
     updatedBy: Attribute.Relation<
-      'api::register-config.register-config',
+      'api::site1-form.site1-form',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    localizations: Attribute.Relation<
+      'api::site1-form.site1-form',
+      'oneToMany',
+      'api::site1-form.site1-form'
+    >;
+    locale: Attribute.String;
+  };
+}
+
+export interface ApiSite1LayoutSite1Layout extends Schema.CollectionType {
+  collectionName: 'site1_layouts';
+  info: {
+    singularName: 'site1-layout';
+    pluralName: 'site1-layouts';
+    displayName: 'site1_layout';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  pluginOptions: {
+    i18n: {
+      localized: true;
+    };
+  };
+  attributes: {
+    internal_name: Attribute.String &
+      Attribute.Required &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: false;
+        };
+      }>;
+    site_1_form: Attribute.Relation<
+      'api::site1-layout.site1-layout',
+      'oneToOne',
+      'api::site1-form.site1-form'
+    >;
+    site: Attribute.Relation<
+      'api::site1-layout.site1-layout',
+      'oneToOne',
+      'api::site.site'
+    > &
+      Attribute.Private;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::site1-layout.site1-layout',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::site1-layout.site1-layout',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    localizations: Attribute.Relation<
+      'api::site1-layout.site1-layout',
+      'oneToMany',
+      'api::site1-layout.site1-layout'
+    >;
+    locale: Attribute.String;
+  };
+}
+
+export interface ApiSite1QuestionSite1Question extends Schema.CollectionType {
+  collectionName: 'site1_questions';
+  info: {
+    singularName: 'site1-question';
+    pluralName: 'site1-questions';
+    displayName: 'site1_question';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  pluginOptions: {
+    i18n: {
+      localized: true;
+    };
+  };
+  attributes: {
+    internal_name: Attribute.String &
+      Attribute.Required &
+      Attribute.Private &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: false;
+        };
+      }>;
+    name: Attribute.String &
+      Attribute.Required &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    type: Attribute.Enumeration<['input', 'markdown']> &
+      Attribute.Required &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: false;
+        };
+      }>;
+    label: Attribute.String &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    placeholder: Attribute.String &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    site: Attribute.Relation<
+      'api::site1-question.site1-question',
+      'oneToOne',
+      'api::site.site'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::site1-question.site1-question',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::site1-question.site1-question',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    localizations: Attribute.Relation<
+      'api::site1-question.site1-question',
+      'oneToMany',
+      'api::site1-question.site1-question'
+    >;
+    locale: Attribute.String;
+  };
+}
+
+export interface ApiSite2FormSite2Form extends Schema.CollectionType {
+  collectionName: 'site2_forms';
+  info: {
+    singularName: 'site2-form';
+    pluralName: 'site2-forms';
+    displayName: 'site2_form';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    internal_name: Attribute.String & Attribute.Required & Attribute.Private;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::site2-form.site2-form',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::site2-form.site2-form',
       'oneToOne',
       'admin::user'
     > &
@@ -1023,13 +1191,14 @@ declare module '@strapi/types' {
       'plugin::users-permissions.permission': PluginUsersPermissionsPermission;
       'plugin::users-permissions.role': PluginUsersPermissionsRole;
       'plugin::users-permissions.user': PluginUsersPermissionsUser;
-      'api::client-one-metadata.client-one-metadata': ApiClientOneMetadataClientOneMetadata;
-      'api::client-one-model.client-one-model': ApiClientOneModelClientOneModel;
-      'api::client-two-model.client-two-model': ApiClientTwoModelClientTwoModel;
       'api::form.form': ApiFormForm;
       'api::layout.layout': ApiLayoutLayout;
       'api::question.question': ApiQuestionQuestion;
-      'api::register-config.register-config': ApiRegisterConfigRegisterConfig;
+      'api::site.site': ApiSiteSite;
+      'api::site1-form.site1-form': ApiSite1FormSite1Form;
+      'api::site1-layout.site1-layout': ApiSite1LayoutSite1Layout;
+      'api::site1-question.site1-question': ApiSite1QuestionSite1Question;
+      'api::site2-form.site2-form': ApiSite2FormSite2Form;
     }
   }
 }

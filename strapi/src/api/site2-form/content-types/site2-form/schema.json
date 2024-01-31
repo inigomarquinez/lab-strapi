@@ -1,0 +1,20 @@
+{
+  "kind": "collectionType",
+  "collectionName": "site2_forms",
+  "info": {
+    "singularName": "site2-form",
+    "pluralName": "site2-forms",
+    "displayName": "site2_form"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "internal_name": {
+      "type": "string",
+      "required": true,
+      "private": true
+    }
+  }
+}
